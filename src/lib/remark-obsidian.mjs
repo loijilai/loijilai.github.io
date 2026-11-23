@@ -28,6 +28,7 @@ function linkNodes(inner, index) {
   const text = alias || (note && heading ? `${note} > ${heading}` : note || heading);
   const slug = index.get(note.normalize('NFC'));
   if (!slug) return { type: 'text', value: text }; // unpublished → no broken link
+  // Same slugger Astro uses for heading ids, so [[note#heading]] anchors match.
   const hash = heading ? '#' + new GithubSlugger().slug(heading) : '';
   return {
     type: 'link',
